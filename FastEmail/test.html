@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<script src="D:/Users/aghatage/Desktop/FastEmail/FastMail/array.js"></script>
+
+<body onLoad="addOption_list()";>
+
+  <FORM name="Issue_list"  >
+
+  <SELECT id="mySelect"  NAME="Issue_name">
+  <Option value="" >Issue_name</option>
+  </SELECT>
+  </form>
+
+<!--<select id="mySelect" onchange="">
+  <option value="CLOAS_ODS">CLOAS ODS
+  <option value="RTS">RTS-->
+
+</select>
+<br>
+<pre id="cloas_ods_mail_list" hidden>akshay.ghatage@capgemini.com;kunal.amritkar@capgemini.com</pre>
+<pre id="cloas_ods_CC_list" hidden>akshay.ghatage@capgemini.com;kunal.amritkar@capgemini.com</pre>
+<pre id="cloas_ods_Subject_list" hidden>Important notification </pre>
+
+<pre id="cloas_ods" hidden>
+  Hi,
+
+  You are receiving this communication because you are one of the users of CLOAS ODS or its downstream.
+
+  Issue –
+  There will be a delay in CLOAS ODS downstreams as there was a delay in reception of files from source. PFA notifications from source.
+                  CLOAS ODS load process has successfully completed. The downstream processes are currently running.
+  Action –
+          We will keep you posted about the progress of the same.
+  ETA    -
+  Next Update –
+          In 2 Hours.
+  Impact –
+          These applications loads might be delayed:
+          CLEAR
+          CIRCLE REPORTING
+          COCKPIT REPORTING
+          LTC EXPERIENCE
+
+  In case of any issues/concerns/questions, kindly drop an email to GNWETLRPSUPP@genworth.com.
+  </pre>
+
+<br>
+Enter ETA:<br>
+<input id="eta_hr" type="text" name="ETA" value="eta"><br>
+<input type="submit" value="Submit" onclick="myFunction()"><br>
+<textarea rows="10" cols="60" id="demo"></textarea>
+<br>
+<textarea rows="10" cols="60" id="demo3"></textarea>
+<p id="demo2"></p>
+
+</body>
+<script>
+
+function myFunction() {
+    /*var x = document.getElementById("mySelect").value;
+    document.getElementById("demo").innerHTML = "You selected: " + x;
+  document.getElementById("demo").innerHTML =x+
+'Hi,'+'<br>'+
+'You are receiving this communication because you are one of the users of CLOAS ODS or its downstream.'+
+'Issue –'+
+'There will be a delay in CLOAS ODS downstreams as there was a delay in reception of files from source. PFA notifications from ';*/
+
+
+/*var str=' <textarea rows="10" cols="60">'+
+'Hi,'+
+'You are receiving this communication because you are one of the users of CLOAS ODS or its downstream.'+
+'Issue –'+
+'There will be a delay in CLOAS ODS downstreams as there was a delay in reception of files from source. PFA notifications from '+
+'';
+
+document.write(str);*/
+
+var x = document.getElementById("mySelect").value;
+var y=document.getElementById("cloas_ods").innerHTML;
+covertEnter(y);
+var z=document.getElementById("eta_hr").value;
+document.getElementById("demo").innerHTML=y+'ETA- '+z;
+var a=replaceETA(y,z);
+var body=myFunction2(a);
+var subject=document.getElementById("cloas_ods_Subject_list").innerHTML;
+var subject_op=myFunction2(subject);
+var to_send=document.getElementById("cloas_ods_mail_list").innerHTML;
+var mail_to=myFunction2(to_send);
+var cc_list=document.getElementById("cloas_ods_CC_list").innerHTML;
+var cc_mail=myFunction2(cc_list);
+document.getElementById("demo2").innerHTML = '<a href="mailto:'+mail_to+'?cc='+cc_mail+'&amp;subject='+subject_op+'&amp;body='+body+'">Send Mail</a>';
+
+}
+//mailto:akshay.ghatage@gmail.com,karan@gmail.com?cc=temya@gmail.com,kiran@gmail.com&amp;subject=Important%20stuff&amp;body=
+function myFunction2(a) {
+    var uri = a;
+    var res = encodeURI(uri);
+    return res;
+    //document.getElementById("demo2").innerHTML = '<a href="mailto:'+res+'">Send Mail</a>';
+}
+
+function replaceETA(qwe,a) {
+    //var str= document.getElementById("demo").innerHTML;
+
+    var res = qwe.replace("ETA    -", "ETA    - "+a);
+   return res;
+   //document.getElementById("demo").innerHTML =res;
+}
+function covertEnter(y){
+var  str = y.replace(/(\r\n|\n|\r)/gm, '123456');
+document.getElementById("demo3").innerHTML =str;
+}
+function addOption(selectbox,text,value )
+{
+	var optn = document.createElement("OPTION");
+	optn.text = text;
+	optn.value = value;
+	selectbox.options.add(optn);
+}
+function addOption_list(){
+
+for (var i=0; i < issueList.length;++i){
+addOption(document.Issue_list.Issue_name, issueList[i], issueList[i]);
+}}
+
+</script>
+
+
+</html>

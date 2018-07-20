@@ -1,0 +1,47 @@
+<html>
+
+<body>
+  <textarea id="name_val" rows="4">Name of Issue</textarea><br/>
+  <textarea id="to_val" rows="4">Recepient List</textarea><br/>
+  <textarea id="cc_val" rows="4">CC_LIST ; seperated</textarea><br/>
+  <textarea id="body_val" rows="10">Body</textarea><br/>
+  <textarea id="subject_val" rows="4">Subject</textarea><br/>
+
+<input type="button" id="dwn-btn" value="Download dynamically generated text file"/>
+</body>
+
+<script>
+function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
+function covertEnter(y){
+var  str = y.replace(/(\r\n|\n|\r)/gm, '123456789');
+return str;
+}
+// Start file download.
+document.getElementById("dwn-btn").addEventListener("click", function(){
+    // Generate download of hello.txt file with some content
+    var name = document.getElementById("name_val").value;
+    var to = document.getElementById("to_val").value;
+    var cc = document.getElementById("cc_val").value;
+    var body1 = document.getElementById("body_val").value;
+    var subject = document.getElementById("subject_val").value;
+    var body=covertEnter(body1);
+    var test2= 'var '+name+' = {"name":"'+name+'","body":"'+body+'", "subject" : "'+subject+'", "cc" : "'+cc+'","to" : "'+to+'"};';
+    console.log(test2);
+    var filename = name+".js";
+
+    download(filename, test2);
+}, false);
+</script>
+
+</html>

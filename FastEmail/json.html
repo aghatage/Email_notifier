@@ -1,0 +1,30 @@
+<html>
+<body>
+
+<p id="user"></p>
+
+<p id="demo2"></p>
+
+</body>
+<script>
+var s = {"cloas_ods_issue":"  Hi,\n\n  You are receiving this communication because you are one of the users of CLOAS ODS or its downstream.\n\n  Issue –\n  There will be a delay in CLOAS ODS downstreams as there was a delay in reception of files from source. PFA notifications from source.\n                  CLOAS ODS load process has successfully completed. The downstream processes are currently running.\n  Action –\n          We will keep you posted about the progress of the same.\n  ETA    -\n  Next Update –\n          In 2 Hours.\n  Impact –\n          These applications loads might be delayed:\n          CLEAR\n          CIRCLE REPORTING\n          COCKPIT REPORTING\n          LTC EXPERIENCE\n\n  In case of any issues/concerns/questions, kindly drop an email to GNWETLRPSUPP@genworth.com.\n  ", "last_name" : "Shark", "location " : "Ocean"};
+
+//var obj = JSON.parse(s);
+var x=s["cloas_ods_issue"];
+console.log(x);
+var y=myFunction2(x);
+document.getElementById("user").innerHTML = x;
+//"Name: " + obj.first_name + " " + obj.last_name + "<br>" +
+//"Location: " + obj.location;
+
+document.getElementById("demo2").innerHTML = '<a href="mailto:someone@example.com?Subject=asdc&body='+y+'" target="_top">Send Mail</a>';
+
+function myFunction2(a) {
+    var uri = a;
+    var res = encodeURI(uri);
+    return res;
+    //document.getElementById("demo2").innerHTML = '<a href="mailto:'+res+'">Send Mail</a>';
+}
+</script>
+
+</html>

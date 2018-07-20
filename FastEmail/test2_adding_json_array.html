@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="D:/Users/aghatage/Desktop/FastEmail/FastMail/array.js"></script>
+
+<a href="Download_file.html"  target="_top">Add a template</a><br><br>
+
+<body onLoad="addOption_list()";>
+
+  <FORM name="Issue_list"  >
+
+  <SELECT id="mySelect"  NAME="Issue_name">
+  <Option value="" >Issue_name</option>
+  </SELECT>
+  </form>
+
+
+</select>
+
+
+
+<br>
+Enter ETA:<br>
+<input id="eta_hr" type="text" name="ETA" value="eta"><br>
+<input type="submit" value="Submit" onclick="myFunction()"><br>
+<!--<br>
+<textarea rows="10" cols="60" id="demo3"></textarea>-->
+<p id="demo2"></p>
+
+</body>
+<script>
+
+function myFunction() {
+
+
+
+var dropdown_value = document.getElementById("mySelect").value;
+var z=document.getElementById("eta_hr").value;
+
+  var obj=issueList[dropdown_value];
+  //console.log(obj);
+
+  var body_content=replaceETA(obj["body"],z);
+  //document.getElementById("demo3").innerHTML=body_content;
+  var subject_content=obj["subject"];
+  var cc_content=obj["cc"];
+  var to_content=obj["to"];
+  var body_content1=myFunction2(body_content);
+  createMail(body_content1,to_content,cc_content,subject_content);
+
+//covertEnter(y);
+//var z=document.getElementById("eta_hr").value;
+//document.getElementById("demo").innerHTML=y+'ETA- '+z;
+//var a=replaceETA(y,z);
+//var body=myFunction2(a);
+
+
+}
+//mailto:akshay.ghatage@gmail.com,karan@gmail.com?cc=temya@gmail.com,kiran@gmail.com&amp;subject=Important%20stuff&amp;body=
+
+function createMail(body_content1,to_content,cc_content,subject_content){
+  document.getElementById("demo2").innerHTML = '<a href="mailto:'+to_content+'?cc='+cc_content+'&amp;subject='+subject_content+'&amp;body='+body_content1+'">Send Mail</a>';
+}
+
+function myFunction2(a) {
+    var uri = a;
+    var res = encodeURI(uri);
+    return res;
+    //document.getElementById("demo2").innerHTML = '<a href="mailto:'+res+'">Send Mail</a>';
+}
+
+function replaceETA(qwe,a) {
+      var res = qwe.replace("ETA    -", "ETA    - "+a);
+       return res;
+
+}
+
+
+function addOption(selectbox,text,value )
+{
+	var optn = document.createElement("OPTION");
+	optn.text = text;
+	optn.value = value;
+	selectbox.options.add(optn);
+}
+function addOption_list(){
+
+for (var i=0; i < issueList.length;++i){
+addOption(document.Issue_list.Issue_name, issueList[i].name, i);
+}}
+
+</script>
+
+
+</html>
